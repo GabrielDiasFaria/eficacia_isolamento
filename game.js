@@ -235,6 +235,7 @@ function chart() {
     secondsHealed = []
     secondsInfected = []
     secondsNormal = []
+    secondsChart = []
 
     // chart colors
     var colors = [colorNormal, colorInfected, colorHealed];
