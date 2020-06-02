@@ -18,10 +18,10 @@
     <div id="root">
         <h1 class="text-center">Isolation Descomplicando Linguagens</h1>
         <div class="row" style="margin-top: 40px;">
-            <div id="div_form" class="col-sm-6">
+            <div id="div_form" class="col-sm-4">
 
                 <div class="form-group">
-                    <div class="   col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3">
                         <label> Qtd Infectada</label>
                         <input type="text" id="infecteds" name="infecteds" class="form-control "
                             placeholder="Quantidade Infectada" required="">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="   col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3">
                         <label> Qtd Móvel</label>
                         <input type="text" id="movable" name="infecteds" class="form-control "
                             placeholder="Quantidade Movel" required="">
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="   col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3">
                         <label> Qtd Imóvel</label>
                         <input type="text" id="imovable" name="infecteds" class="form-control "
                             placeholder="Quantidade Imóvel" required="">
@@ -45,13 +45,39 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="   col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3">
                         <button class="btn btn-primary" onclick="initAnalyse()">Iniciar</button>
                     </div>
                 </div>
 
             </div>
-            <div id="div_canvas" class="col-sm-6">
+
+            <div id="" class="col-sm-3">
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="   col-md-6 offset-md-3">
+                            <label>Número Total</label>
+                            <input id="total" disabled type="text" class="form-control ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="   col-md-6 offset-md-3">
+                            <label>Número de Infectados</label>
+                            <input id="total_infecteds" disabled type="text" class="form-control ">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="   col-md-6 offset-md-3">
+                            <label>Número de Infectados</label>
+                            <input id="total_healed" disabled type="text" class="form-control ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div_canvas" class="col-sm-5">
 
             </div>
         </div>

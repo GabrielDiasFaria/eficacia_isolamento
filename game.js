@@ -109,6 +109,14 @@ function initAnalyse() {
     let movable = document.getElementById("movable")
     let imovable = document.getElementById("imovable")
 
+    let totalTxt = document.getElementById("total")
+    let totalInfectedsTxt = document.getElementById("total_infecteds")
+    let totalHealedTxt = document.getElementById("total_healed")
+
+    let total = 0
+    let totalInfecteds = 0
+    let totalHealed = 0
+
     // Infecteds
     for (var i = 0; i < infecteds.value; i++) {
         balls.push(new Ball(gameWindow, gameContext, gameDiv, i, "INFECTED", true))
@@ -128,9 +136,25 @@ function initAnalyse() {
     if (intervals.length == 0) {
         let interval = setInterval(function () {
             gameContext.clearRect(0, 0, gameWindow.width, gameWindow.height);
+
+            total = 0
+            totalInfecteds = 0
+            totalHealed = 0
+
+            total = balls.length
+
             balls.forEach(ball => {
+                if (ball.infected == "INFECTED")
+                    totalInfecteds++
+                else if (ball.infected == "HEALED")
+                    totalHealed++
+
                 ball.update()
             });
+
+            totalTxt.value = total
+            totalInfectedsTxt.value = totalInfecteds
+            totalHealedTxt.value = totalHealed
         }, 200 / 13);
 
         intervals.push(interval)
