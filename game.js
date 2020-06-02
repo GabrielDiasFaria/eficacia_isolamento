@@ -112,10 +112,12 @@ function initAnalyse() {
     let totalTxt = document.getElementById("total")
     let totalInfectedsTxt = document.getElementById("total_infecteds")
     let totalHealedTxt = document.getElementById("total_healed")
+    let maxInfectedsTxt = document.getElementById("max_infecteds")
 
     let total = 0
     let totalInfecteds = 0
     let totalHealed = 0
+    let maxInfecteds = 0
 
     // Infecteds
     for (var i = 0; i < infecteds.value; i++) {
@@ -140,6 +142,7 @@ function initAnalyse() {
             total = 0
             totalInfecteds = 0
             totalHealed = 0
+            maxInfecteds = 0
 
             total = balls.length
 
@@ -149,12 +152,16 @@ function initAnalyse() {
                 else if (ball.infected == "HEALED")
                     totalHealed++
 
+                if (totalInfecteds > maxInfecteds)
+                    maxInfecteds = totalInfecteds
+
                 ball.update()
             });
 
             totalTxt.value = total
             totalInfectedsTxt.value = totalInfecteds
             totalHealedTxt.value = totalHealed
+            maxInfectedsTxt.value = maxInfecteds
         }, 200 / 13);
 
         intervals.push(interval)
