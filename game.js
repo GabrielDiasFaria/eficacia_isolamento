@@ -142,7 +142,6 @@ function initAnalyse() {
             total = 0
             totalInfecteds = 0
             totalHealed = 0
-            maxInfecteds = 0
 
             total = balls.length
 
