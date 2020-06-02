@@ -10,8 +10,10 @@ class Ball {
         this.gameWindow = gameWindow
         this.gameContext = gameContext
         this.gameDiv = gameDiv
-        this.x = getRndInteger(1, this.gameWindow.width)
-        this.y = getRndInteger(1, this.gameWindow.height)
+        this.marginScreenX = 5
+        this.marginScreenY = 5
+        this.x = getRndInteger(this.marginScreenX, this.gameWindow.width - this.marginScreenX)
+        this.y = getRndInteger(this.marginScreenY, this.gameWindow.height - this.marginScreenY)
         this.dx = 1
         this.dy = 1
         this.radius = 5
@@ -41,8 +43,8 @@ class Ball {
 
         // Boundary Logic
         if (this.movable) {
-            if (this.x < 0 || this.x > this.gameWindow.width) this.dx = -this.dx;
-            if (this.y < 0 || this.y > this.gameWindow.height) this.dy = -this.dy;
+            if (this.x < this.marginScreenX || this.x > this.gameWindow.width - this.marginScreenX) this.dx = -this.dx;
+            if (this.y < this.marginScreenY || this.y > this.gameWindow.height - this.marginScreenY) this.dy = -this.dy;
             this.x += this.dx;
             this.y += this.dy;
         }
@@ -50,6 +52,12 @@ class Ball {
         this.checkCollision()
 
         this.draw()
+
+        // if (this.x < this.marginScreenX - this.radius || this.x > this.gameWindow.width - this.marginScreenX + this.radius)
+        //     this.x = getRndInteger(this.marginScreenX, this.gameWindow.width - this.marginScreenX)
+
+        // if (this.y < this.marginScreenY - this.radius || this.y > this.gameWindow.height - this.marginScreenY + this.radius)
+        //     this.y = getRndInteger(this.marginScreenY, this.gameWindow.height - this.marginScreenY)
     }
 
     draw() {
@@ -72,15 +80,22 @@ class Ball {
                 if (dist <= (this.radius * 2)) {
                     if (ball.infected == "INFECTED" && this.infected != "HEALED")
                         this.infected = "INFECTED"
-                    let rdm = getRndInteger(1, 10)
-                    if (rdm <= 10)
-                        this.dx = -this.dx;
-                    else if (rdm > 10 && rdm <= 20)
-                        this.dy = -this.dy;
-                    else if (rdm > 20 && rdm <= 30)
-                        this.dx = +this.dx;
-                    else if (rdm > 30 && rdm <= 40)
-                        this.dy = +this.dy;
+                    let rdm = getRndInteger(1, 40)
+                    if (
+                        this.x < this.marginScreenX ||
+                        this.x > this.gameWindow.width - this.marginScreenX ||
+                        this.y < this.marginScreenY ||
+                        this.y > this.gameWindow.height - this.marginScreenY
+                    ) { } else {
+                        if (rdm <= 10 && this.x < 0)
+                            this.dx = -this.dx;
+                        if (rdm > 10 && rdm <= 20)
+                            this.dy = -this.dy;
+                        if (rdm > 20 && rdm <= 30)
+                            this.dx = -this.dx;
+                        if (rdm > 30 && rdm <= 40)
+                            this.dy = -this.dy;
+                    }
                 }
 
             }
@@ -118,6 +133,7 @@ function initAnalyse() {
     let totalInfecteds = 0
     let totalHealed = 0
     let maxInfecteds = 0
+    let initProcess = true
 
     // Infecteds
     for (var i = 0; i < infecteds.value; i++) {
@@ -151,11 +167,10 @@ function initAnalyse() {
                 else if (ball.infected == "HEALED")
                     totalHealed++
 
-                if (totalInfecteds > maxInfecteds)
-                    maxInfecteds = totalInfecteds
-
                 ball.update()
             });
+
+            maxInfecteds = totalInfecteds + totalHealed
 
             totalTxt.value = total
             totalInfectedsTxt.value = totalInfecteds
@@ -165,6 +180,7 @@ function initAnalyse() {
 
         intervals.push(interval)
     }
+
 }
 
 window.onload = () => {
