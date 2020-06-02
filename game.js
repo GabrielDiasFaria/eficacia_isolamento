@@ -1,8 +1,18 @@
 let balls = []
 const app = document.getElementById('div_canvas');
+var chLine = document.getElementById("chLine");
 const gameWindow = createCanvas(app, 400, 400);
 const gameDiv = 20;
 let intervals = []
+
+let colorInfected = "#ff0000"
+let colorHealed = "#00ff00"
+let colorNormal = "#0066ff"
+
+let secondsChart = []
+let secondsInfected = []//[589, 445, 483, 503, 689, 692, 634]
+let secondsHealed = []
+let secondsNormal = []
 
 class Ball {
     constructor(gameWindow, gameContext, gameDiv, id, infected, movable) {
@@ -25,11 +35,11 @@ class Ball {
 
     setColor() {
         if (this.infected == "INFECTED")
-            return "#ff0000"
+            return colorInfected
         else if (this.infected == "NORMAL")
-            return "#0066ff"
+            return colorNormal
         else if (this.infected == "HEALED")
-            return "#00ff00"
+            return colorHealed
     }
 
     update() {
@@ -117,6 +127,8 @@ function createCanvas(app, width, height) {
 
 function initAnalyse() {
 
+    chart()
+
     balls = []
     const gameContext = gameWindow.getContext('2d');
 
@@ -160,7 +172,7 @@ function initAnalyse() {
     }
     // const ball = new Ball(gameWindow, gameContext, gameDiv);
 
-    if (intervals.length == 0) {
+    if (intervals.length < 2) {
         let interval = setInterval(function () {
             gameContext.clearRect(0, 0, gameWindow.width, gameWindow.height);
 
@@ -185,39 +197,93 @@ function initAnalyse() {
             totalInfectedsTxt.value = totalInfecteds
             totalHealedTxt.value = totalHealed
             maxInfectedsTxt.value = maxInfecteds
-        }, 200 / 13);
 
+        }, 200 / 13);
         intervals.push(interval)
+
+        let interval2 = setInterval(function () {
+            total = 0
+            totalInfecteds = 0
+            totalHealed = 0
+
+            total = balls.length
+
+            balls.forEach(ball => {
+                if (ball.infected == "INFECTED")
+                    totalInfecteds++
+                else if (ball.infected == "HEALED")
+                    totalHealed++
+            });
+
+            if (totalHealed != balls.length) {
+                secondsInfected.push(totalInfecteds)
+                secondsNormal.push(total - totalInfecteds - totalHealed)
+                secondsHealed.push(totalHealed)
+                secondsChart.push(".")
+            }
+
+            window.myLine.update();
+        }, 1000)
+        intervals.push(interval2)
+
     }
 
 }
 
-window.onload = () => {
+function chart() {
 
-    // const app = document.getElementById('div_canvas');
-    // const gameWindow = createCanvas(app, 400, 400);
-    // const gameContext = gameWindow.getContext('2d');
-    // const gameDiv = 20;
+    secondsHealed = []
+    secondsInfected = []
+    secondsNormal = []
 
-    // balls.push(new Ball(gameWindow, gameContext, gameDiv, i, "INFECTED", true))
+    // chart colors
+    var colors = [colorNormal, colorInfected, colorHealed];
 
-    // // Moveis
-    // for (var i = 0; i < 5; i++) {
-    //     balls.push(new Ball(gameWindow, gameContext, gameDiv, i, "NORMAL", true))
-    // }
+    /* large line chart */
 
-    // // Imoveis
-    // for (var i = 0; i < 40; i++) {
-    //     balls.push(new Ball(gameWindow, gameContext, gameDiv, i, "NORMAL", false))
-    // }
-    // // const ball = new Ball(gameWindow, gameContext, gameDiv);
+    var chartData = {
+        labels: secondsChart,
+        datasets: [
+            {
+                data: secondsNormal,
+                backgroundColor: 'transparent',
+                borderColor: colors[0],
+                // borderWidth: 4,
+                pointBackgroundColor: colors[0]
+            },
+            {
+                data: secondsInfected,
+                backgroundColor: 'transparent',
+                borderColor: colors[1],
+                // borderWidth: 4,
+                pointBackgroundColor: colors[1]
+            },
+            {
+                data: secondsHealed,
+                backgroundColor: 'transparent',
+                borderColor: colors[2],
+                // borderWidth: 4,
+                pointBackgroundColor: colors[2]
+            }
+        ]
+    };
 
-    // setInterval(function () {
-    //     gameContext.clearRect(0, 0, gameWindow.width, gameWindow.height);
-    //     balls.forEach(ball => {
-    //         ball.update()
-    //     });
-
-    // }, 200 / 13);
-
+    if (chLine) {
+        window.myLine = new Chart(chLine, {
+            type: 'line',
+            data: chartData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+    }
 }
