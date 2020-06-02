@@ -21,26 +21,26 @@
             <div id="div_form" class="col-sm-4">
 
                 <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <label> Qtd Infectada</label>
-                        <input type="text" id="infecteds" name="infecteds" class="form-control "
-                            placeholder="Quantidade Infectada" required="">
+                    <div class="col-md-9 offset-md-3">
+                        <label>Indivíduos Infectados</label>
+                        <input type="number" id="infecteds" name="infecteds" class="form-control "
+                            placeholder="Quantidade Infectada" min="1" max="5" required="">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <label> Qtd Móvel</label>
-                        <input type="text" id="movable" name="infecteds" class="form-control "
-                            placeholder="Quantidade Movel" required="">
+                    <div class="col-md-9 offset-md-3">
+                        <label>Indivíduos fora do isolamento</label>
+                        <input type="number" id="movable" name="infecteds" class="form-control "
+                            placeholder="Quantidade Movel" max="1000" required="">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-6 offset-md-3">
-                        <label> Qtd Imóvel</label>
-                        <input type="text" id="imovable" name="infecteds" class="form-control "
-                            placeholder="Quantidade Imóvel" required="">
+                    <div class="col-md-9 offset-md-3">
+                        <label>Indivíduos respentando o isolamento</label>
+                        <input type="number" id="imovable" name="infecteds" class="form-control "
+                            placeholder="Quantidade Imóvel" max="1000" required="">
                     </div>
                 </div>
 
@@ -55,28 +55,28 @@
             <div id="" class="col-sm-3">
                 <div class="form-group">
                     <div class="form-group">
-                        <div class="   col-md-6 offset-md-3">
+                        <div class="col-md-9 offset-md-3">
                             <label>Número Total</label>
                             <input id="total" disabled type="text" class="form-control ">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="   col-md-6 offset-md-3">
+                        <div class="col-md-9 offset-md-3">
                             <label>Número de Infectados</label>
                             <input id="total_infecteds" disabled type="text" class="form-control ">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="   col-md-6 offset-md-3">
+                        <div class="col-md-9 offset-md-3">
                             <label>Máximo de Infectados</label>
                             <input id="max_infecteds" disabled type="text" class="form-control ">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="   col-md-6 offset-md-3">
+                        <div class="col-md-9 offset-md-3">
                             <label>Número de Curados</label>
                             <input id="total_healed" disabled type="text" class="form-control ">
                         </div>

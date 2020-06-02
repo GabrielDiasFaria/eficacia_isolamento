@@ -124,6 +124,15 @@ function initAnalyse() {
     let movable = document.getElementById("movable")
     let imovable = document.getElementById("imovable")
 
+    if (infecteds.value > 1000)
+        infecteds.value = 1000
+
+    if (movable.value > 1000)
+        movable.value = 1000
+
+    if (imovable.value > 1000)
+        imovable.value = 1000
+
     let totalTxt = document.getElementById("total")
     let totalInfectedsTxt = document.getElementById("total_infecteds")
     let totalHealedTxt = document.getElementById("total_healed")
