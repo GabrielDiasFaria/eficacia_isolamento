@@ -10,7 +10,7 @@ let colorHealed = "#00ff00"
 let colorNormal = "#0066ff"
 
 let secondsChart = []
-let secondsInfected = []//[589, 445, 483, 503, 689, 692, 634]
+let secondsInfected = []
 let secondsHealed = []
 let secondsNormal = []
 
@@ -63,20 +63,14 @@ class Ball {
 
         this.draw()
 
-        // if (this.x < this.marginScreenX - this.radius || this.x > this.gameWindow.width - this.marginScreenX + this.radius)
-        //     this.x = getRndInteger(this.marginScreenX, this.gameWindow.width - this.marginScreenX)
-
-        // if (this.y < this.marginScreenY - this.radius || this.y > this.gameWindow.height - this.marginScreenY + this.radius)
-        //     this.y = getRndInteger(this.marginScreenY, this.gameWindow.height - this.marginScreenY)
     }
 
     draw() {
-        this.gameContext.beginPath();
-        this.gameContext.fillStyle = this.setColor();
-        // Draws a circle of radius 20 at the coordinates 100,100 on the canvas
-        this.gameContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-        this.gameContext.closePath();
-        this.gameContext.fill();
+        this.gameContext.beginPath()
+        this.gameContext.fillStyle = this.setColor()
+        this.gameContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+        this.gameContext.closePath()
+        this.gameContext.fill()
 
         // this.gameContext.fillText(this.stepInfected, this.x - 2, this.y - 7)
     }
@@ -154,7 +148,6 @@ function initAnalyse() {
     let totalInfecteds = 0
     let totalHealed = 0
     let maxInfecteds = 0
-    let initProcess = true
 
     // Infecteds
     for (var i = 0; i < infecteds.value; i++) {
@@ -215,7 +208,7 @@ function initAnalyse() {
                     totalHealed++
             });
 
-            if (totalHealed != balls.length) {
+            if (totalInfecteds != 0) {
                 secondsInfected.push(totalInfecteds)
                 secondsNormal.push(total - totalInfecteds - totalHealed)
                 secondsHealed.push(totalHealed)
@@ -237,10 +230,7 @@ function chart() {
     secondsNormal = []
     secondsChart = []
 
-    // chart colors
     var colors = [colorNormal, colorInfected, colorHealed];
-
-    /* large line chart */
 
     var chartData = {
         labels: secondsChart,
@@ -249,21 +239,18 @@ function chart() {
                 data: secondsNormal,
                 backgroundColor: 'transparent',
                 borderColor: colors[0],
-                // borderWidth: 4,
                 pointBackgroundColor: colors[0]
             },
             {
                 data: secondsInfected,
                 backgroundColor: 'transparent',
                 borderColor: colors[1],
-                // borderWidth: 4,
                 pointBackgroundColor: colors[1]
             },
             {
                 data: secondsHealed,
                 backgroundColor: 'transparent',
                 borderColor: colors[2],
-                // borderWidth: 4,
                 pointBackgroundColor: colors[2]
             }
         ]

@@ -13,9 +13,17 @@ body,
 }
 
 body {
-  background-color: #ecf0f1;
+  background-color: #000000;
 }
 
 #root canvas {
-  border:1px solid #000000;
+  border:1px solid aliceblue;
+}
+
+h1{
+  color: aliceblue;
+}
+
+label{
+  color: aliceblue;
 }
